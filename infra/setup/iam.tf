@@ -29,18 +29,18 @@ data "aws_iam_policy_document" "ec2" {
       "ec2:CreateTags",
       "ec2:DeleteTags",
 
-    #   # Управління Elastic IP (якщо потрібне)
-    #   "ec2:AllocateAddress",
-    #   "ec2:ReleaseAddress",
-    #   "ec2:AssociateAddress",
-    #   "ec2:DisassociateAddress",
+      #   # Управління Elastic IP (якщо потрібне)
+      #   "ec2:AllocateAddress",
+      #   "ec2:ReleaseAddress",
+      #   "ec2:AssociateAddress",
+      #   "ec2:DisassociateAddress",
 
-    #   # Управління EBS (якщо використовується)
-    #   "ec2:AttachVolume",
-    #   "ec2:DetachVolume",
-    #   "ec2:DescribeVolumes",
-    #   "ec2:CreateVolume",
-    #   "ec2:DeleteVolume"
+      #   # Управління EBS (якщо використовується)
+      #   "ec2:AttachVolume",
+      #   "ec2:DetachVolume",
+      #   "ec2:DescribeVolumes",
+      #   "ec2:CreateVolume",
+      #   "ec2:DeleteVolume"
     ]
     resources = ["*"]
   }
