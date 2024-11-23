@@ -29,6 +29,7 @@ jobs:
           port: ${{ secrets.VM_PORT }}
           script: |
             cd ${{ vars.WORK_APP_DIR }}
+
             git pull origin main
             docker-compose pull
             docker-compose down
@@ -37,4 +38,14 @@ jobs:
             echo "DB_PASS=${{ secrets.DB_PASS }}" >> .env
             echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
             echo "DJANGO_ALLOWED_HOSTS=${{ vars.VM_HOST }}" >> .env
+
+            docker run -d --name dd-agent \
+            -e DD_API_KEY=${{ secrets.DD_API_KEY }} \
+            -e DD_SITE="datadoghq.eu" \
+            -v /var/run/docker.sock:/var/run/docker.sock:ro \
+            -v /proc/:/host/proc/:ro \
+            -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+            -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
+            gcr.io/datadoghq/agent:7
+
             docker-compose -f docker-compose-deploy.yml up -d --build
