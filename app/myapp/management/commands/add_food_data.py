@@ -2,6 +2,7 @@
 from django.core.management.base import BaseCommand
 from myapp.models import Food
 
+
 class Command(BaseCommand):
     help = 'Add 10 rows of food calorie data to the database'
 
@@ -38,7 +39,7 @@ class Command(BaseCommand):
                     protein=food['protein'],
                     fats=food['fats'],
                     calories=food['calories']
-                )
+                    )
             txt_message ='Successfully added 10 food items to the database'
             self.stdout.write(self.style.SUCCESS(txt_message))
         else:
