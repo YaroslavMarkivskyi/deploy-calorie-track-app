@@ -40,7 +40,7 @@ class Command(BaseCommand):
                     fats=food['fats'],
                     calories=food['calories']
                     )
-            txt_message ='Successfully added 10 food items to the database'
+            txt_message = 'Successfully added 10 food items to the database'
             self.stdout.write(self.style.SUCCESS(txt_message))
         else:
             self.stdout.write(self.style.SUCCESS('Database is not empty!'))
