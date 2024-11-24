@@ -37,7 +37,7 @@ jobs:
             echo "DB_USER=${{ vars.DB_USER }}" >> .env
             echo "DB_PASS=${{ secrets.DB_PASS }}" >> .env
             echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
-            echo "DJANGO_ALLOWED_HOSTS=${{ vars.VM_HOST }}" >> .env
+            echo "DJANGO_ALLOWED_HOSTS=${{ secrets.VM_HOST }}" >> .env
 
             docker run -d --name dd-agent \
             -e DD_API_KEY=${{ secrets.DD_API_KEY }} \
