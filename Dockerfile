@@ -1,5 +1,5 @@
 FROM python:3.9-alpine3.13
-LABEL maintainer="londonappdeveloper.com"
+LABEL maintainer="yaroslavmarkivskyi.it.2022@lpnu.ua"
 
 ENV PYTHONUNBUFFERED 1
 
