@@ -23,7 +23,7 @@ jobs:
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
   deploy:
-    uses: ./.github/workflows/deploy1.yml
+    uses: ./.github/workflows/deploy.yml
     needs: build
     with:
         WORK_APP_DIR: ${{ vars.WORK_APP_DIR }}
