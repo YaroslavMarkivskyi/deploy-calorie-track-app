@@ -26,5 +26,20 @@ jobs:
     uses: ./.github/workflows/deploy1.yml
     needs: build
     secrets:
-      DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
+        DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+        VM_HOST: ${{ secrets.VM_HOST }}
+        VM_USERNAME: ${{ secrets.VM_USERNAME }}
+        VM_PRIVATE_KEY: ${{ secrets.VM_PRIVATE_KEY }}
+        VM_PORT: ${{ secrets.VM_PORT }}
+        WORK_APP_DIR: ${{ vars.WORK_APP_DIR }}
+        DB_NAME: ${{ vars.DB_NAME }}
+        DB_USER: ${{ vars.DB_USER }}
+        DB_PASS: ${{ secrets.DB_PASS }}
+        DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+        DD_API_KEY: ${{ secrets.DD_API_KEY }}
+
+
+
+
+
