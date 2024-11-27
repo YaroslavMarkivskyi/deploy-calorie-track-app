@@ -1,26 +1,46 @@
-name: Deploy
+name: Deploy to Production
 
 on:
-  push:
-    branches:
-      - main
-      - prod
+    workflow_call:
+      secrets:
+        DOCKERHUB_USER:
+          required: true
+        DOCKERHUB_TOKEN:
+          required: true
+        VM_HOST:
+          required: true
+        VM_USERNAME:
+          required: true
+        VM_PRIVATE_KEY:
+          required: true
+        VM_PORT:
+          required: true
+        DB_PASS:
+          required: true
+        DJANGO_SECRET_KEY:
+          required: true
+        DD_API_KEY:
+          required: true
+      inputs:
+        WORK_APP_DIR:
+          required: true
+          type: string
+        DB_NAME:
+          required: true
+          type: string
+        DB_USER:
+          required: true
+          type: string
 
 jobs:
-  test-lint:
-    uses: ./.github/workflows/test-and-lint.yml
-    name: Test and Lint
-    secrets:
-      DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-
   deploy:
+    name: Deploy Application
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: SSH connect to VM
+      - name: SSH Connect to VM and Deploy
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.VM_HOST }}
@@ -29,10 +49,10 @@ jobs:
           port: ${{ secrets.VM_PORT }}
           script: |
             cd ${{ vars.WORK_APP_DIR }}
-
             git pull origin main
             docker-compose pull
             docker-compose down
+
             echo "DB_NAME=${{ vars.DB_NAME }}" >> .env
             echo "DB_USER=${{ vars.DB_USER }}" >> .env
             echo "DB_PASS=${{ secrets.DB_PASS }}" >> .env
