@@ -12,14 +12,14 @@ jobs:
   test-and-lint:
     uses: ./.github/workflows/test-and-lint.yml
     secrets:
-      DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
+      DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
   build:
     uses: ./.github/workflows/build.yml
     needs: test-and-lint
     secrets:
-      DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
+      DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
   deploy:
@@ -30,7 +30,7 @@ jobs:
         DB_NAME: ${{ vars.DB_NAME }}
         DB_USER: ${{ vars.DB_USER }}
     secrets:
-        DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
+        DOCKERHUB_USER: ${{ vars.DOCKERHUB_USER }}
         DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
         VM_HOST: ${{ secrets.VM_HOST }}
         VM_USERNAME: ${{ secrets.VM_USERNAME }}
